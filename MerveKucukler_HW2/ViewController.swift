@@ -1,10 +1,10 @@
 import UIKit
-import SafariServices
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
+        table.separatorStyle = .none
         return table
     }()
     
@@ -13,21 +13,62 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // title = "News"
+        title = "News"
         view.backgroundColor = .systemBackground
         
         setupTableView()
         fetchTopStories()
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    @objc private func deviceOrientationDidChange() {
+        tableView.reloadData()
     }
     
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.frame = view.bounds
-        view.addSubview(tableView)
-    }
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorInset = UIEdgeInsets(top: 5, left: 5, bottom: 25, right: 10)
+        
+        let headerView = UIView()
+            headerView.backgroundColor = .systemBackground
+            
+            let titleLabel = UILabel()
+            titleLabel.text = "NEWS"
+            titleLabel.font = UIFont(name: "Georgia", size: 34)
+            titleLabel.textColor = .black
+            titleLabel.textAlignment = .center
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            headerView.addSubview(titleLabel)
+            NSLayoutConstraint.activate([
+                titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+                titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+            ])
+            
+            tableView.tableHeaderView = headerView
+            view.addSubview(tableView)
+            
+            NSLayoutConstraint.activate([
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                tableView.topAnchor.constraint(equalTo: view.topAnchor),
+                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        }
+
+        
+      
     
-    private func fetchTopStories() {
+  private func fetchTopStories() {
         APICaller.shared.getTopStories { [weak self] result in
             switch result {
             case .success(let result):
@@ -35,7 +76,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self?.viewModels = result.compactMap { result in
                     return NewsTableViewCellViewModel(
                         title: result.title,
-                        subtitle: result.abstract ?? "No Description",
+                        subtitle: result.abstract ,
                         imageURL: URL(string: result.multimedia?.first?.url ?? "")
                     )
                 }
@@ -47,7 +88,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
     // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,35 +105,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedResult = result[indexPath.row] // Seçilen haber sonucunu alın
         
-        // Detay sayfasını oluşturun
+       
         let detailVC = NewsDetailVC(nibName: "DetailViewController", bundle: nil)
         
-        // Seçili haber sonucunu detay sayfasına aktarın
+        
         detailVC.newsResult = selectedResult
         
-        // Detay sayfasını görüntüleyin
+       
         navigationController?.pushViewController(detailVC, animated: true)
-    }
-}
-    
-   /// SafariViewController kullanımı için örnek kod
-  /*  private func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let selectedResult = result[indexPath.row]
-        ;guard let url = URL(string: selectedResult.url) else {
+        
+        guard URL(string: selectedResult.url) != nil else {
             return
         }
         
-        let vc = SFSafariViewController(url: url)
-        present(vc, animated: true)
-    }*/
+        // let vc = SFSafariViewController(url: url)
+        // present(vc, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+        
     }
-
+}

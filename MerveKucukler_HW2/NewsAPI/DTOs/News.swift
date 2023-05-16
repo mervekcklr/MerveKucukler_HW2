@@ -6,27 +6,23 @@
 //
 
 import Foundation
-public struct News : Decodable {
-    public let section : String?
-    //public let status : String?
-    public let results : [NewsResults]?
+struct News : Decodable {
+    let section : String?
+    let results : [NewsResults]?
     
-   }
+}
 
-
-public struct NewsResults: Decodable {
-    public let url: String
-   public let multimedia: [Multimedia]?
-    public let  section : String
-    public  let title : String
-    public let abstract : String
-    public let byline : String
-    
-    
-    }
+struct NewsResults: Decodable {
+    let url: String
+    let multimedia: [Multimedia]?
+    let  section : String
+    let title : String
+    let abstract : String
+    let byline : String
+}
 
 
 
-public struct Multimedia : Decodable {
+struct Multimedia : Decodable {
     let url : String
 }

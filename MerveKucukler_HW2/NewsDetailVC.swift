@@ -21,9 +21,12 @@ class NewsDetailVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setupUI()
+       
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setupUI()
+    }
     private func setupUI() {
         titleLabel.text = newsResult?.title
         bylineLabel.text = newsResult?.byline

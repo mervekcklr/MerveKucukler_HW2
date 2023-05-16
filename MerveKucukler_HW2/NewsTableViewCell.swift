@@ -1,5 +1,6 @@
 import UIKit
 
+
 class NewsTableViewCellViewModel {
     let title: String
     let subtitle: String
@@ -17,23 +18,26 @@ class NewsTableViewCellViewModel {
 class NewsTableViewCell: UITableViewCell {
     static let identifier = "NewsTableViewCell"
     
+  
+
+    
     private let newsTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 10, weight: .light)
+        label.font = .systemFont(ofSize: 12, weight: .light)
         return label
     }()
     
     private let newsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 6
+        imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
         imageView.clipsToBounds = true
         imageView.backgroundColor = .secondarySystemBackground
@@ -66,10 +70,10 @@ class NewsTableViewCell: UITableViewCell {
             height: contentView.frame.size.height / 2
             )
         newsImageView.frame =  CGRect (
-            x: contentView.frame.size.width - 120,
-            y: 5,
-            width:100,
-            height: 100
+            x: contentView.frame.size.width - 125,
+            y: 8,
+            width:120,
+            height: 120
             )
     }
 
