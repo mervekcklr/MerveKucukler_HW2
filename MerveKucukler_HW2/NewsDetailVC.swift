@@ -16,35 +16,48 @@ class NewsDetailVC: UIViewController {
     @IBOutlet weak var abstractText: UITextView!
     
     var newsResult: NewsResults?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-       
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setupUI()
-    }
-    private func setupUI() {
-        titleLabel.text = newsResult?.title
-        bylineLabel.text = newsResult?.byline
-        urlLabel.text = newsResult?.url
-        abstractText.text = newsResult?.abstract
         
-        if let imageURLString = newsResult?.multimedia?.first?.url,
-           let imageURL = URL(string: imageURLString) {
-            DispatchQueue.global().async { [weak self] in
-                if let data = try? Data(contentsOf: imageURL) {
-                    DispatchQueue.main.async {
-                        self?.newsImageView.image = UIImage(data: data)
+        override func viewDidLoad() {
+            super.viewDidLoad()
+        }
+        
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            setupUI()
+            customizeTitleLabel()
+        }
+        
+        private func setupUI() {
+            titleLabel.text = newsResult?.title
+            sectionLabel.text = newsResult?.section
+            bylineLabel.text = newsResult?.byline
+            // urlLabel.text = newsResult?.url
+            abstractText.text = newsResult?.abstract
+            
+            if let imageURLString = newsResult?.multimedia?.first?.url,
+               let imageURL = URL(string: imageURLString) {
+                DispatchQueue.global().async { [weak self] in
+                    if let data = try? Data(contentsOf: imageURL) {
+                        DispatchQueue.main.async {
+                            self?.newsImageView.image = UIImage(data: data)
+                        }
                     }
                 }
             }
         }
-    }
-    
+        
+        private func customizeTitleLabel() {
+            if let titleLabel = navigationItem.titleView as? UILabel {
+                titleLabel.font = UIFont(name: "Georgia", size: 34)
+            } else {
+                let titleLabel = UILabel()
+                titleLabel.text = "News Detail"
+                titleLabel.font = UIFont(name: "Georgia", size: 34)
+                titleLabel.textColor = .black
+                titleLabel.sizeToFit()
+                navigationItem.titleView = titleLabel
+            }
+        }
     @IBAction func seeMoreButtonTapped(_ sender: Any) {
         if let urlString = newsResult?.url,
            let url = URL(string: urlString) {
@@ -52,4 +65,5 @@ class NewsDetailVC: UIViewController {
             present(vc, animated: true)
         }
     }
+    
 }
