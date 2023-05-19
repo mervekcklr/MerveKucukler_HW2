@@ -39,5 +39,5 @@ This project is a news listing application made using the New york times API.
 | Vertical                        | Horizontal
 | ------------------------------- | ------------------------------- |
 | ![Vertical](https://giphy.com/gifs/oCBQFUeSRnMqfQLON5) | ![Horizontal] (https://giphy.com/gifs/oCBQFUeSRnMqfQLON5)|
-
+https://youtu.be/kIlPUXpjYzM 
 
