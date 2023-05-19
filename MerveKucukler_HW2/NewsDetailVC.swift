@@ -57,7 +57,7 @@ class NewsDetailVC: UIViewController {
         }
         
         titleLabel.text = "News Detail"
-        titleLabel.font = UIFont(name: "Georgia", size: 34)
+        titleLabel.font = UIFont(name: "Georgia", size: 28)
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         titleLabel.sizeToFit()

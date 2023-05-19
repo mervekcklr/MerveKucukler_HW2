@@ -15,7 +15,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
+        if NetworkMonitor.shared.isConnected {
+            print("you're connected")
+        } else {
+            print("you're not connected")
+        }
         setupNavigationBar()
         setupTableView()
         fetchTopStories()
@@ -32,37 +36,26 @@ class ViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationController?.navigationBar.barTintColor = .systemBackground
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont(name: "Georgia", size: 20)!
-        ]
         
-        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.title = "NEWS"
+        
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black,
+                                    .font: UIFont(name: "Georgia", size: 28)!]
+        navBarAppearance.backgroundColor = .systemBackground
+        
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         
-        let headerView = UIView()
-        headerView.backgroundColor = .systemBackground
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 0.1))
+        tableView.tableHeaderView?.backgroundColor = .systemBackground
         
-        let titleLabel = UILabel()
-        titleLabel.text = "NEWS"
-        titleLabel.font = UIFont(name: "Georgia", size: 34)
-        titleLabel.textColor = .black
-        titleLabel.textAlignment = .center
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        headerView.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -20)
-        ])
-        
-        tableView.tableHeaderView = headerView
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -94,7 +87,6 @@ class ViewController: UIViewController {
         }
     }
 }
-
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
@@ -124,12 +116,5 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
-        
-        func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            super.viewWillTransition(to: size, with: coordinator)
-            coordinator.animate(alongsideTransition: { _ in
-                self.tableView.reloadData()
-            }, completion: nil)
-        }        }
+    }
 }
-
