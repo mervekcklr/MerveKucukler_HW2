@@ -9,9 +9,7 @@ import Foundation
 struct News : Decodable {
     let section : String?
     let results : [NewsResults]?
-    
 }
-
 struct NewsResults: Decodable {
     let url: String
     let multimedia: [Multimedia]?
@@ -20,8 +18,6 @@ struct NewsResults: Decodable {
     let abstract : String
     let byline : String
 }
-
-
 
 struct Multimedia : Decodable {
     let url : String

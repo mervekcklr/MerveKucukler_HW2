@@ -41,23 +41,3 @@ final class APICaller {
         task.resume()
     }
 }
-
-// Models
-
-/*struct APIResponse: Codable {
-    let articles: [Article]
-}
-
-struct Article: Codable {
-    let source: Source
-    let title: String
-    let section: String
-    let abstract: String
-    let url: String
-    let multimedia: [String]
-}
-
-struct Source: Codable {
-    let name: String
-}
-*/

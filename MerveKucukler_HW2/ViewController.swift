@@ -1,10 +1,11 @@
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         table.separatorStyle = .none
+        table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
@@ -33,17 +34,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private func setupNavigationBar() {
         navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Georgia", size: 20)!]
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont(name: "Georgia", size: 20)!
+        ]
         
-        // İkinci başlığı kaldırma
         navigationItem.largeTitleDisplayMode = .never
     }
     
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorInset = UIEdgeInsets(top: 5, left: 5, bottom: 25, right: 10)
         
         let headerView = UIView()
         headerView.backgroundColor = .systemBackground
@@ -58,7 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         headerView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -20)
         ])
         
         tableView.tableHeaderView = headerView
@@ -92,9 +93,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
-    // MARK: - TableView
-    
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
@@ -112,16 +113,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let selectedResult = result[indexPath.row] // Seçilen haber sonuc
-
+        let selectedResult = result[indexPath.row]
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-       if let detailVC = storyboard.instantiateViewController(withIdentifier: "NewsDetailVC") as? NewsDetailVC {
+        if let detailVC = storyboard.instantiateViewController(withIdentifier: "NewsDetailVC") as? NewsDetailVC {
             detailVC.newsResult = selectedResult
-          navigationController?.pushViewController(detailVC, animated: true)
+            navigationController?.pushViewController(detailVC, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
-    }
+        
+        func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            super.viewWillTransition(to: size, with: coordinator)
+            coordinator.animate(alongsideTransition: { _ in
+                self.tableView.reloadData()
+            }, completion: nil)
+        }        }
 }
+

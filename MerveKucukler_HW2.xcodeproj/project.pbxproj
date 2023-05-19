@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		02918DCC2A13E2F70080A4A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02918DCB2A13E2F70080A4A1 /* ViewController.swift */; };
-		02918DCE2A13E3DD0080A4A1 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02918DCD2A13E3DD0080A4A1 /* NewViewController.swift */; };
-		02918DD22A140C930080A4A1 /* NewStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02918DD12A140C930080A4A1 /* NewStoryTableViewCell.swift */; };
 		02A56A2F2A0E876B000EE070 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A2E2A0E876B000EE070 /* AppDelegate.swift */; };
 		02A56A312A0E876B000EE070 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A302A0E876B000EE070 /* SceneDelegate.swift */; };
 		02A56A362A0E876B000EE070 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A56A342A0E876B000EE070 /* Main.storyboard */; };
@@ -20,7 +18,6 @@
 		02A56A532A0E8772000EE070 /* MerveKucukler_HW2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A522A0E8772000EE070 /* MerveKucukler_HW2UITests.swift */; };
 		02A56A552A0E8772000EE070 /* MerveKucukler_HW2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A542A0E8772000EE070 /* MerveKucukler_HW2UITestsLaunchTests.swift */; };
 		02A56A622A0E87A2000EE070 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A612A0E87A2000EE070 /* APICaller.swift */; };
-		02A56A642A0F7F1B000EE070 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A632A0F7F1B000EE070 /* File.swift */; };
 		02A56A662A0F8C85000EE070 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A652A0F8C85000EE070 /* NewsTableViewCell.swift */; };
 		02A56A6A2A100A81000EE070 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A692A100A81000EE070 /* News.swift */; };
 		02A56A6C2A1018CF000EE070 /* Decoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A56A6B2A1018CF000EE070 /* Decoders.swift */; };
@@ -47,8 +44,6 @@
 
 /* Begin PBXFileReference section */
 		02918DCB2A13E2F70080A4A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		02918DCD2A13E3DD0080A4A1 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
-		02918DD12A140C930080A4A1 /* NewStoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoryTableViewCell.swift; sourceTree = "<group>"; };
 		02A56A2B2A0E876B000EE070 /* MerveKucukler_HW2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MerveKucukler_HW2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02A56A2E2A0E876B000EE070 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02A56A302A0E876B000EE070 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +58,6 @@
 		02A56A522A0E8772000EE070 /* MerveKucukler_HW2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerveKucukler_HW2UITests.swift; sourceTree = "<group>"; };
 		02A56A542A0E8772000EE070 /* MerveKucukler_HW2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerveKucukler_HW2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		02A56A612A0E87A2000EE070 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
-		02A56A632A0F7F1B000EE070 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		02A56A652A0F8C85000EE070 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		02A56A692A100A81000EE070 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		02A56A6B2A1018CF000EE070 /* Decoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoders.swift; sourceTree = "<group>"; };
@@ -129,12 +123,9 @@
 				02A56A3C2A0E8771000EE070 /* LaunchScreen.storyboard */,
 				02A56A3F2A0E8771000EE070 /* Info.plist */,
 				02A56A372A0E876B000EE070 /* MerveKucukler_HW2.xcdatamodeld */,
-				02A56A632A0F7F1B000EE070 /* File.swift */,
 				02A56A652A0F8C85000EE070 /* NewsTableViewCell.swift */,
 				02A56A7F2A120816000EE070 /* NewsDetailVC.swift */,
 				02918DCB2A13E2F70080A4A1 /* ViewController.swift */,
-				02918DCD2A13E3DD0080A4A1 /* NewViewController.swift */,
-				02918DD12A140C930080A4A1 /* NewStoryTableViewCell.swift */,
 			);
 			path = MerveKucukler_HW2;
 			sourceTree = "<group>";
@@ -324,12 +315,9 @@
 				02A56A662A0F8C85000EE070 /* NewsTableViewCell.swift in Sources */,
 				02A56A6A2A100A81000EE070 /* News.swift in Sources */,
 				02A56A712A10285D000EE070 /* viewController2.swift in Sources */,
-				02A56A642A0F7F1B000EE070 /* File.swift in Sources */,
 				02918DCC2A13E2F70080A4A1 /* ViewController.swift in Sources */,
 				02A56A2F2A0E876B000EE070 /* AppDelegate.swift in Sources */,
-				02918DD22A140C930080A4A1 /* NewStoryTableViewCell.swift in Sources */,
 				02A56A312A0E876B000EE070 /* SceneDelegate.swift in Sources */,
-				02918DCE2A13E3DD0080A4A1 /* NewViewController.swift in Sources */,
 				02A56A802A120816000EE070 /* NewsDetailVC.swift in Sources */,
 				02A56A622A0E87A2000EE070 /* APICaller.swift in Sources */,
 				02A56A392A0E876B000EE070 /* MerveKucukler_HW2.xcdatamodeld in Sources */,
@@ -515,8 +503,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -543,8 +530,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

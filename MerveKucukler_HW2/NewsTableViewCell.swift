@@ -1,5 +1,6 @@
 import UIKit
 
+import UIKit
 
 class NewsTableViewCellViewModel {
     let title: String
@@ -55,33 +56,44 @@ class NewsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // Yerleşim işlemlerini burada yapabilirsiniz.
+        
+        let imageSize: CGFloat = 120
+        let contentPadding: CGFloat = 10
+        
+        let availableWidth = contentView.bounds.width - contentPadding * 3 - imageSize
+        let titleLabelSize = newsTitleLabel.sizeThatFits(CGSize(width: availableWidth, height: CGFloat.greatestFiniteMagnitude))
+        let subtitleLabelSize = subtitleLabel.sizeThatFits(CGSize(width: availableWidth, height: CGFloat.greatestFiniteMagnitude))
+        
+        let titleLabelHeight = min(titleLabelSize.height, contentView.bounds.height / 2)
+        let subtitleLabelHeight = min(subtitleLabelSize.height, contentView.bounds.height / 2)
+        
         newsTitleLabel.frame = CGRect(
-            x: 10, y: 0, width: 250 ,
-            height: 70
+            x: contentPadding,
+            y: contentPadding,
+            width: availableWidth,
+            height: titleLabelHeight
         )
-        subtitleLabel.frame =  CGRect (
-            x: 10,
-            y: 70,
-            width:  250,
-            height: contentView.frame.size.height / 2
-            )
-        newsImageView.frame =  CGRect (
-            x: contentView.frame.size.width - 125,
-            y: 8,
-            width:120,
-            height: 120
-            )
+        
+        subtitleLabel.frame = CGRect(
+            x: contentPadding,
+            y: newsTitleLabel.frame.maxY + contentPadding,
+            width: availableWidth,
+            height: subtitleLabelHeight
+        )
+        
+        newsImageView.frame = CGRect(
+            x: contentView.bounds.width - imageSize - contentPadding,
+            y: (contentView.bounds.height - imageSize) / 2,
+            width: imageSize,
+            height: imageSize
+        )
     }
-
     
     override func prepareForReuse() {
         super.prepareForReuse()
         newsTitleLabel.text = nil
         subtitleLabel.text = nil
         newsImageView.image = nil
-        // Hücre yeniden kullanıma hazırlandığında yapılacak işlemleri burada yapabilirsiniz.
-       
     }
     
     func configure(with viewModel: NewsTableViewCellViewModel) {
@@ -90,22 +102,16 @@ class NewsTableViewCell: UITableViewCell {
         
         if let data = viewModel.imageData {
             newsImageView.image = UIImage(data: data)
-        }
-        else if let url = viewModel.imageURL  {
-            /*newsImageView.image = nil
-            if let imageURL = viewModel.imageURL {
-                // Asenkron olarak görüntüyü yüklemek için uygun bir yöntem kullanabilirsiniz.*/
-            URLSession.shared.dataTask(with: url) { data, response , error in
-                guard let data = data, error == nil else {
-                    return
-                }
+        } else if let url = viewModel.imageURL {
+            URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                guard let data = data, error == nil else { return }
                 viewModel.imageData = data
                 DispatchQueue.main.async {
-                    self.newsImageView.image = UIImage(data: data)
+                    self!.newsImageView.image = UIImage(data: data)
                 }
             }.resume()
-            }
         }
     }
+}
 
 
